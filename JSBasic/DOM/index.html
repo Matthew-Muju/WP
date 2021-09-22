@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+
+  <title>JavaScript DOM</title>
+</head>
+<body>
+  <header id="main-header">
+    <h1 id="title">Manage Prodi</h1>
+  </header>
+
+  <div id="main">
+    <h2 class="sub-title">Add Prodi</h2>
+    
+    <form id="prodi-form">
+      <input type="text" name="prodiName" id="prodi-name">
+      <input type="text" name="prodiAbbr" id="prodi-abbr">
+      <input type="submit" value="Add Prodi">
+    </form>
+
+    <h2 class="sub-title">List of Prodi</h2>
+
+    <label for="text">Search: </label> <input type="text" name="search" id="search">
+
+    <ul id="prodi">
+      <li class="list-item">Ilmu Filsafat / FIL | <a href="#" class="delete">Delete</a> </li>
+      <li class="list-item">Akuntansi / AKUN | <a href="#" class="delete">Delete</a> </li>
+      <li class="list-item">Manajemen / MANA | <a href="#" class="delete">Delete</a> </li>
+      <li class="list-item">Sistem Informasi / SI | <a href="#" class="delete">Delete</a> </li>
+    </ul>
+
+    <p>List subject to change.</p>
+
+    <button id="buttonClick">Click Me</button>
+
+    <p>&nbsp;</p>
+
+    
+    <p>&nbsp;</p>
+
+    <div id="kotak"></div>
+  </div>
+
+  <footer id="footer">
+    <p>Copyright 2021</p>
+  </footer>
+
+  <script src="prodi.js"></script>
+</body>
+</html>
