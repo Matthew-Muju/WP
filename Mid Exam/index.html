@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <title>Student ListApp | VanillaJS</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Student Management Mini App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container mt-3">
+    <h1 class="text-info">Student Management</h1>
+    <h2>Mini App</h2>
+    <hr>
+
+    <div class="row pt-2">
+      <div class="col-8">
+        <h4>Add Student</h4>
+        <button class="btn btn-info mt-4 mb-4 w-100 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#showform">Show/Hide Form Add New Student</button>
+        <div id="showform" class="collapse">       
+          <form id="add-student" onsubmit="event.preventDefault(); onFormSubmit()" autocomplete="off">
+            <div class="mb-3">
+              <label for="inputNIM" class="form-label" name="studentID" id="studentID">Student ID (NIM)</label>
+              <input type="text" class="form-control" id="inputNIM" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputFullName" class="form-label" name="fullName" id="fullName">Full Name</label>
+            <input type="text" class="form-control" id="inputFullName" required>
+          </div>
+          <fieldset class="form-group">
+            <div class="row">
+              <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="genders" id="gridMale" value="Male" checked>
+                  <label class="form-check-label" for="gridMale">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="genders" id="gridFemale" value="Female">
+                  <label class="form-check-label" for="gridFemale">
+                    Female
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="mb-3">
+            <label for="Fakultas" class="form-label">Fakultas</label>
+            <select name="Fakultas" class="form-control fakultas selectFilter" id="Fakultas" data-bs-target="Prodi" onchange="random_function()" required>
+              <option value="" selected disabled>-- Pilih Fakultas--</option>
+              <option data-ref="ps">PascaSarjana</option>
+              <option data-ref="ffil">Fakultas Filsafat</option>
+              <option data-ref="fkip">Fakultas Keguruan Dan Ilmu Pendidikan</option>
+              <option data-ref="feb">Fakultas Ekonomi Dan Bisnis</option>
+              <option data-ref="fp">Fakultas Pertanian</option>
+              <option data-ref="fik">Fakultas Ilmu Komputer</option>
+              <option data-ref="fkep">Fakultas Keperawatan</option>
+              <option data-ref="asm">Akademi Sekretari Manajemen Indonesia Klabat</option>
+            </select>
+          </div>
+          <div class="mb-3" id="output">
+            <label for="Prodi" class="form-label">Program of Study</label>
+            <select name="Prodi" class="form-control prodi1 selectFilter" id="Prodi" required>
+              <option value="" selected disabled>-- Pilih Program Studi --</option>
+              
+            </select>
+          </div>
+          <input class="btn btn-info mt-4 mb-4 w-100 p-1" type="submit" value="Submit">
+        </form>
+      </div>
+      
+      </div>
+      <div class="col-4">
+        <h4>Filter Students By</h4>
+        <form>
+          <div class="mb-3">
+            <label for="FakultasFilter" class="form-label">Fakultas</label>
+            <select name="FakultasFilter" class="form-control FakultasFilter selectFilter" id="FakultasFilter" data-bs-target="Prodi" onchange="random_function2()">
+              <option value="" selected disabled>-- Pilih Fakultas--</option>
+              <option data-ref="ps">PascaSarjana</option>
+              <option data-ref="ffil">Fakultas Filsafat</option>
+              <option data-ref="fkip">Fakultas Keguruan Dan Ilmu Pendidikan</option>
+              <option data-ref="feb">Fakultas Ekonomi Dan Bisnis</option>
+              <option data-ref="fp">Fakultas Pertanian</option>
+              <option data-ref="fik">Fakultas Ilmu Komputer</option>
+              <option data-ref="fkep">Fakultas Keperawatan</option>
+              <option data-ref="asm">Akademi Sekretari Manajemen Indonesia Klabat</option>
+            </select>
+          </div>
+            <div class="d-grid">
+              <button type="submit" onclick="event.preventDefault(); filterFaculty()" class="btn btn-info mb-4">Filter</button>
+            </div>
+            <div class="mb-3">
+              <label for="ProdiFilter" class="form-label">Program of Study</label>
+            <select name="ProdiFilter" class="form-control ProdiFilter selectFilter" id="ProdiFilter">
+              <option value="" selected disabled>-- Pilih Program Studi --</option>
+              
+            </select>
+            </div>
+              <div class="d-grid">
+                <button type="submit" onclick="event.preventDefault(); filterProdi()" class="btn btn-info mb-4">Filter</button>
+              </div>
+          </div>
+        </form></div>
+    </div>
+    
+    <hr>  
+    <div class="container mt-3 text-center">
+      <h2>OUR STUDENTS</h2>
+      <input type="text" placeholder="Search" class="w-100 p-2" name="search" id="search" onkeyup="myFunction()">
+    </div>
+    <div class="container pt-4 mt-4 text-center">
+      <table class="table table-striped" id="student-data">
+        <thead>
+          <tr>
+            <td>Student ID (NIM)</td>
+            <td>FullName</td>
+            <td>Gender</td>
+            <td>Faculty</td>
+            <td>Program of Study</td>
+            <td>Action</td>
+          </tr>
+        <thead>
+        <tbody>
+          <tr>
+          <td>105021110090</td>
+          <td>John Doe</td>
+          <td>Male</td>
+          <td>Fakultas Ilmu Komputer</td>
+          <td>Sistem Informasi</td>
+          <td><a href="#" class="link-danger"><i class="bi bi-trash"></i></a></td>
+        </tr>
+        <tr>
+          <td>105021410680</td>
+          <td>David McGregor</td>
+          <td>Male</td>
+          <td>Fakultas Ilmu Komputer</td>
+          <td>Informatika</td>
+          <td><a href="#" class="link-danger"><i class="bi bi-trash"></i></a></td>
+        </tr>
+        <tr>
+          <td>105021710060</td>
+          <td>Juan Johnson</td>
+          <td>Male</td>
+          <td>Fakultas Ekonomi dan Bisnis</td>
+          <td>Akuntansi</td>
+          <td><a href="#" class="link-danger"><i class="bi bi-trash"></i></a></td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="py-4">
+    <hr>
+    <p class="text-center text-uppercase">&copy; 2021 by Matthew Muju</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+</html>
